@@ -31,13 +31,14 @@ export function authenticate(
 
   try {
     const decoded = jwt.verify(
-      token,
+      token.replace("Bearer ", ""),
       process.env.JWT_SECRET || JwtSecret,
     ) as User;
     req.user = decoded;
+    console.log("Decoded token:", decoded);
     next();
   } catch (error) {
     console.error("Error verifying token:", error);
-    res.status(401).json({ message: "Invalid token" });
+    res.status(401).json({ message: "Invalid token", error: error.message });
   }
 }
