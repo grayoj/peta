@@ -10,8 +10,9 @@ export class AuthService {
     username: string,
     email: string,
     password: string,
-  ): Promise<string> {
+  ): Promise<void> {
     const hashedPassword = await bcrypt.hash(password, 10);
+
     const newUser = new UserModel({
       firstname,
       lastname,
@@ -20,7 +21,6 @@ export class AuthService {
       password: hashedPassword,
     });
     await newUser.save();
-    return this.generateToken(newUser._id);
   }
 
   static async login(email: string, password: string): Promise<string | null> {
