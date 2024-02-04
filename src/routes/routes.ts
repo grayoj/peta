@@ -16,14 +16,14 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post("/signup", AuthController.signup);
-router.post("/login", AuthController.login);
+router.post("/api/v1/signup", AuthController.signup);
+router.post("/api/v1/login", AuthController.login);
 router.post("/secure", authenticate, (_req, res) => {
   res.status(200).json({ message: "Secure route accessed successfully" });
 });
 
 router.post(
-  "/process-pdf",
+  "/api/v1/process",
   authenticate,
   upload.single("pdfFile"),
   (req: CustomRequest<Express.Multer.File>, res: Response) => {

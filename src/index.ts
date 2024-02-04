@@ -3,24 +3,26 @@ import dotenv from "dotenv";
 import { ServerPort } from "./helpers/constants";
 import db from "./libs/database";
 import routes from "./routes/routes";
+import cors from "cors";
 
 dotenv.config();
 
-const app: Express = express();
+const e: Express = express();
 const port: number = parseInt(process.env.PORT || ServerPort, 10);
 
 db.on("open", () => {
   console.log("Database connected successfully");
 });
 
-app.get("/", (_req: Request, res: Response) => {
+e.use(cors());
+e.get("/", (_req: Request, res: Response) => {
   res.send("Hello, TypeScript Express! Database connection established.");
 });
 
-app.use(express.json());
+e.use(express.json());
 
-app.use(routes);
+e.use(routes);
 
-app.listen(port, () => {
+e.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
 });
