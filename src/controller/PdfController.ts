@@ -9,6 +9,13 @@ type CustomResponse<T> = Response & {
   json: (body: T) => CustomResponse<T>;
 };
 
+/**
+ * It’s a module augmentation to extend the types defined in express.
+ * As you see I am extending the response interface to include a custom json method that will return the instance of the response itself.
+ * So now the json method returns the correct type. *
+ *
+ **/
+
 declare module "express" {
   interface Response {
     json: (body: any) => this;
