@@ -1,18 +1,16 @@
-import * as react from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { ZodError, z } from "zod";
-import { AuthRequest } from "../services/AuthRequests";
-import { Loader } from "./Loader";
-import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import * as react from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { ZodError, z } from 'zod';
+import { AuthRequest } from '../services/AuthRequests';
+import { Loader } from './Loader';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const schema = z.object({
-  firstname: z.string().trim().min(1, { message: "First name is required" }),
-  lastname: z.string().trim().min(1, { message: "Last name is required" }),
-  email: z.string().email({ message: "Invalid email address" }),
-  password: z
-    .string()
-    .min(8, { message: "Password must be at least 8 characters long" }),
+  firstname: z.string().trim().min(1, { message: 'First name is required' }),
+  lastname: z.string().trim().min(1, { message: 'Last name is required' }),
+  email: z.string().email({ message: 'Invalid email address' }),
+  password: z.string().min(8, { message: 'Password must be at least 8 characters long' }),
 });
 
 type FormValues = z.infer<typeof schema>;
@@ -51,18 +49,18 @@ export default function SignupForm() {
     if (isLoading.current) return;
     try {
       isLoading.current = true;
-      console.log("Form submitted with data:", data);
+      console.log('Form submitted with data:', data);
       await AuthRequest<FormValues>({
-        method: "post",
-        endpoint: "/signup",
+        method: 'post',
+        endpoint: '/signup',
         data,
       });
-      navigate("/login");
-      toast.success("Signup successful");
-      console.log("Signup successful");
+      navigate('/login');
+      toast.success('Signup successful');
+      console.log('Signup successful');
     } catch (error: unknown) {
-      toast.error("Signup failed");
-      console.error("Signup failed:", (error as Error).message);
+      toast.error('Signup failed');
+      console.error('Signup failed:', (error as Error).message);
     } finally {
       isLoading.current = false;
     }
@@ -75,11 +73,8 @@ export default function SignupForm() {
             Create a Peta Account
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Or{" "}
-            <Link
-              to="/login"
-              className="font-medium text-orange-600 hover:text-orange-500"
-            >
+            Or{' '}
+            <Link to="/login" className="font-medium text-orange-600 hover:text-orange-500">
               Login to your account
             </Link>
           </p>
@@ -89,10 +84,7 @@ export default function SignupForm() {
           <div className="bg-white py-8 px-4 shadow sm:rounded-sm sm:px-10">
             <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <label
-                  htmlFor="firstName"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
                   First Name
                 </label>
                 <div className="mt-1">
@@ -100,7 +92,7 @@ export default function SignupForm() {
                     id="firstname"
                     type="text"
                     autoComplete="given-name"
-                    {...register("firstname")}
+                    {...register('firstname')}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-sm sm:text-sm focus:border-neutral-300 focus:outline-none focus:ring-0"
                   />
                 </div>
@@ -113,10 +105,7 @@ export default function SignupForm() {
               </div>
 
               <div>
-                <label
-                  htmlFor="lastname"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="lastname" className="block text-sm font-medium text-gray-700">
                   Last Name
                 </label>
                 <div className="mt-1">
@@ -124,7 +113,7 @@ export default function SignupForm() {
                     id="lastname"
                     type="text"
                     autoComplete="family-name"
-                    {...register("lastname")}
+                    {...register('lastname')}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-sm sm:text-sm focus:border-neutral-300 focus:outline-none focus:ring-0"
                   />
                 </div>
@@ -137,10 +126,7 @@ export default function SignupForm() {
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                   Email address
                 </label>
                 <div className="mt-1">
@@ -148,7 +134,7 @@ export default function SignupForm() {
                     id="email"
                     type="email"
                     autoComplete="email"
-                    {...register("email")}
+                    {...register('email')}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-sm sm:text-sm focus:border-neutral-300 focus:outline-none focus:ring-0"
                   />
                 </div>
@@ -161,10 +147,7 @@ export default function SignupForm() {
               </div>
 
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   Password
                 </label>
                 <div className="mt-1">
@@ -172,7 +155,7 @@ export default function SignupForm() {
                     id="password"
                     type="password"
                     autoComplete="new-password"
-                    {...register("password")}
+                    {...register('password')}
                     className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-sm sm:text-sm focus:border-neutral-300 focus:outline-none focus:ring-0"
                   />
                 </div>
@@ -193,10 +176,7 @@ export default function SignupForm() {
                     type="checkbox"
                     className="h-4 w-4 text-orange-600 rounded-sm focus:border-neutral-300 focus:outline-none focus:ring-0"
                   />
-                  <label
-                    htmlFor="remember-me"
-                    className="ml-2 block text-sm text-gray-900"
-                  >
+                  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
                     Remember me
                   </label>
                 </div>
@@ -208,8 +188,8 @@ export default function SignupForm() {
                   className="w-full flex justify-center py-2 px-4 border border-transparent rounded-sm shadow-sm text-sm font-medium text-white bg-orange-600"
                   disabled={isLoading.current}
                 >
-                  {isLoading.current ? <Loader visible={true} /> : "Sign Up"}
-                </button>{" "}
+                  {isLoading.current ? <Loader visible={true} /> : 'Sign Up'}
+                </button>{' '}
               </div>
             </form>
           </div>
