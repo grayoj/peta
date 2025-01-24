@@ -1,4 +1,4 @@
-import axios, { Method, AxiosResponse, AxiosError } from "axios";
+import axios, { Method, AxiosResponse, AxiosError } from 'axios';
 
 interface RequestData {
   [key: string]: any;
@@ -15,11 +15,7 @@ interface AuthRequestError {
   response?: AxiosResponse<any>;
 }
 
-export async function AuthRequest<T>({
-  method,
-  endpoint,
-  data,
-}: AuthRequestConfig): Promise<T> {
+export async function AuthRequest<T>({ method, endpoint, data }: AuthRequestConfig): Promise<T> {
   const apiUrl = `http://localhost:9000/api/v1${endpoint}`;
   const config = { method, url: apiUrl, data };
 

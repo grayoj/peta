@@ -1,1 +1,1 @@
-declare module "@adobe/pdfservices-node-sdk";
+declare module '@adobe/pdfservices-node-sdk';

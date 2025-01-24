@@ -2,12 +2,7 @@
   "compilerOptions": {
     "target": "es6",
     "module": "commonjs",
-    "lib": [
-      "dom",
-      "es6",
-      "es2017",
-      "esnext.asynciterable"
-    ],
+    "lib": ["dom", "es6", "es2017", "esnext.asynciterable"],
     "sourceMap": true,
     "esModuleInterop": true,
     "noFallthroughCasesInSwitch": true,
@@ -26,14 +21,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules"
-  ],
-  "typeRoots": [
-    "./typings",
-    "./node_modules/@types/"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules"],
+  "typeRoots": ["./typings", "./node_modules/@types/"]
 }

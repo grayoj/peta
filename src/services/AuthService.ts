@@ -1,7 +1,7 @@
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { UserModel } from "../models/UserModel";
-import { JwtSecret } from "../helpers/constants";
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { UserModel } from '../models/UserModel';
+import { JwtSecret } from '../helpers/constants';
 
 export class AuthService {
   static async signup(
@@ -35,7 +35,7 @@ export class AuthService {
 
   private static generateToken(userId: string): string {
     return jwt.sign({ userId }, process.env.JWT_SECRET || JwtSecret, {
-      expiresIn: "1h",
+      expiresIn: '1h',
     });
   }
 }

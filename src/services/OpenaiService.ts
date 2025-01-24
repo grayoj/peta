@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from 'axios';
 
 export class OpenAIService {
   static async generateCreditReport(financialData: any): Promise<string> {
@@ -7,7 +7,7 @@ export class OpenAIService {
         financialData,
       )}`;
       const response: AxiosResponse<any> = await axios.post(
-        process.env.OPENAI_API_URL || "",
+        process.env.OPENAI_API_URL || '',
         {
           prompt: `${instruction}`,
           max_tokens: 100,
@@ -15,7 +15,7 @@ export class OpenAIService {
         {
           headers: {
             Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         },
       );
@@ -23,8 +23,8 @@ export class OpenAIService {
       const creditReport: string = response.data.choices[0].text;
       return creditReport;
     } catch (error) {
-      console.error("Error generating credit report:", error);
-      throw new Error("Error generating credit report");
+      console.error('Error generating credit report:', error);
+      throw new Error('Error generating credit report');
     }
   }
 }

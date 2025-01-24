@@ -1,4 +1,4 @@
-import { createStore } from "zustand";
+import { createStore } from 'zustand';
 
 export interface TokenState {
   token: string | null;

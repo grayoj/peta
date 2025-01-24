@@ -1,6 +1,6 @@
-import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
-import { JwtSecret } from "../../helpers/constants";
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import { JwtSecret } from '../../helpers/constants';
 
 type User = {
   id: string;
@@ -22,23 +22,23 @@ export function authenticate(
   res: Response<any, Record<string, any>>,
   next: NextFunction,
 ): void {
-  const token = req.header("Authorization");
+  const token = req.header('Authorization');
 
   if (!token) {
-    res.status(401).json({ message: "No token provided" });
+    res.status(401).json({ message: 'No token provided' });
     return;
   }
 
   try {
     const decoded = jwt.verify(
-      token.replace("Bearer ", ""),
+      token.replace('Bearer ', ''),
       process.env.JWT_SECRET || JwtSecret,
     ) as User;
     req.user = decoded;
-    console.log("Decoded token:", decoded);
+    console.log('Decoded token:', decoded);
     next();
   } catch (error) {
-    console.error("Error verifying token:", error);
-    res.status(401).json({ message: "Invalid token", error: error.message });
+    console.error('Error verifying token:', error);
+    res.status(401).json({ message: 'Invalid token', error: error.message });
   }
 }
